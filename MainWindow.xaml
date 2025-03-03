@@ -1,0 +1,41 @@
+﻿<Window x:Class="MyRepeater.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyRepeater"
+        mc:Ignorable="d"
+        Title="MyRepeater" Height="240" Width="500">
+
+    <DockPanel LastChildFill="True">
+
+        <!-- 停靠左侧 -->
+        <StackPanel DockPanel.Dock="Left" Width="180" Background="AliceBlue">
+            <Button x:Name="StartRecord" Content="开始录制" Margin="5" Height="30" Click="StartRecord_Click"/>
+            <Button x:Name="EndRecord" Content="结束录制" Margin="5" Height="30" Click="EndRecord_Click"/>
+            <Button x:Name="StartRepeat" Content="开始重放" Margin="5" Height="30" Click="StartRepeat_Click"/>
+            <Button x:Name="EndRepeat" Content="结束重放" Margin="5" Height="30" Click="EndRepeat_Click"/>
+            <Button x:Name="Delete" Content="删除记录" Margin="5" Height="30" Click="Delete_Click"/>
+        </StackPanel>
+
+        <!-- 停靠底部 -->
+        <StatusBar DockPanel.Dock="Bottom" Background="LightGray">
+            <StatusBarItem x:Name="Statusbar" Content="{Binding State}"/>
+        </StatusBar>
+
+        <!-- 剩余空间，由最后一个元素填充 -->
+        <Grid Background="White">
+            <ListView Name="Record"
+                      SelectionMode="Single"
+                      ItemsSource="{Binding Record}"
+                      SelectionChanged="Record_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="名称" Width="250" DisplayMemberBinding="{Binding RecordName}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </DockPanel>
+
+</Window>
